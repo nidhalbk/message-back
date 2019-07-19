@@ -1,6 +1,4 @@
-import express from 'express';
-
-import { ApolloServer, gql } from 'apollo-server-express';
+import { ApolloServer, gql } from 'apollo-server';
 import mongoose from 'mongoose';
 
 const typeDefs = gql`
@@ -16,14 +14,13 @@ const resolvers = {
 };
 
 const server = new ApolloServer({ typeDefs, resolvers });
-const app = express();
-server.applyMiddleware({ app });
+
 mongoose.Promise = global.Promise;
 
-app.listen({ port: 4000 }, () => {
+server.listen({ port: 4000 }, () => {
   const url = 'mongodb://localhost:27017/graphqldb';
 
   mongoose.connect(url, { useNewUrlParser: true });
   mongoose.connection.once('open', () => console.log(`Connected to mongo at ${url}`));
-  console.log(`🚀 Server ready at http://localhost:4000${server.graphqlPath}`)
+  console.log(`🚀 Server ready at http://localhost:4000${server.graphqlPath}`);
 });
