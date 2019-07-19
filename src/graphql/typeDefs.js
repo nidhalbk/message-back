@@ -3,28 +3,28 @@ import { gql } from 'apollo-server';
 const typeDefs = gql`
   type Query {
     getAllUser: [User!]!
-    getCurrentUser: User!
-    getMessagesForUser(id: ID): [Message!]!
+    getUser(id: ID!): User!
+    getMessagesForUser(id: ID!): [Message!]!
   }
   type Mutation {
     createMessage(data: createMessageInput): Message!
   }
   type User {
-    _id: ID! @Unique
+    _id: ID!
     name: String!
-    userName: String! @Unique
+    userName: String! 
     pic: String
   }
   type Message {
-    _id: ID! @Unique
-    body: tring!
+    _id: ID!
+    body: String!
     sender: User!
     reciever: User!
-    createdAt: String!
+    createdAt: String
     updatedAt: String
   }
   input createMessageInput {
-    body: tring!
+    body: String!
     sender: ID!
     reciever: ID!
   }

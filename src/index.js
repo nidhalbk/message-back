@@ -1,27 +1,15 @@
 import { ApolloServer, gql } from 'apollo-server';
 import mongoose from 'mongoose';
 import db from './models';
+import resolvers from './graphql/resolvers';
+import typeDefs from './graphql/typeDefs'
 
 const { UserSchema, MessageSchema } = db;
 
-const typeDefs = gql`
-  type Query {
-    hello: String
-  }
-`;
 const test = new UserSchema({
   name: 'nidhal',
   userName: 'NBK',
 });
-
-const resolvers = {
-  Query: {
-    hello: (parent, args, context) => {
-      console.log(context);
-      return 'Hello World!';
-    },
-  },
-};
 
 const server = new ApolloServer({ typeDefs, resolvers, context: db });
 
