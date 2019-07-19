@@ -1,0 +1,4 @@
+{
+  "presets": ["env"],
+  "plugins": ["transform-export-default", "transform-object-rest-spread"]
+}
