@@ -1,3 +1,4 @@
 import createMessage from './createMessage';
+import createUser from './createUser';
 
-export default createMessage;
+export { createMessage as default, createUser };
