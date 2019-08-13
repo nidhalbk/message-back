@@ -1,4 +1,10 @@
-const getAllConversation = (parent, args, { db }, info) => {
-  return db.ConversationSchema.find({ participants: { user: args.user } });
+const { ObjectId } = require('mongoose').Types;
+
+const getAllConversation = async (parent, args, { db }) => {
+  const user = new ObjectId(args.user);
+  const convers = await db.ConversationSchema.find({
+    participants: { user },
+  }).exec();
+  return convers;
 };
 export default getAllConversation;

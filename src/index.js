@@ -1,9 +1,10 @@
 import { ApolloServer, gql } from 'apollo-server';
-import { PubSub } from 'graphql-subscriptions'
+import { PubSub } from 'graphql-subscriptions';
 import mongoose from 'mongoose';
+import { useragent } from 'express-useragent';
 import db from './models';
 import resolvers from './graphql/resolvers';
-import typeDefs from './graphql/typeDefs'
+import typeDefs from './graphql/typeDefs';
 
 const { UserSchema, MessageSchema } = db;
 const pubsub = new PubSub();
@@ -16,7 +17,11 @@ const user2 = new UserSchema({
   name: 'nidhal2',
   userName: 'NBK2',
 });
-const server = new ApolloServer({ typeDefs, resolvers, context:{ db, pubsub} });
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
+  context: ({ req }) => ({ db, pubsub, req }),
+});
 
 mongoose.Promise = global.Promise;
 

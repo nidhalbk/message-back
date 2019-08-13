@@ -1,6 +1,6 @@
 const createUser = async (parent, { data }, { db }) => {
   let user = await db.UserSchema.findOne({ userName: data.userName }).exec();
-  console.log(user);
+  // console.log(user);
   if (user) {
     throw new Error('userName exist');
   }

@@ -16,6 +16,10 @@ const UserSchema = new Schema(
     pic: {
       type: String,
     },
+    onLine: {
+      type: Boolean,
+      default: false,
+    },
   },
   { collection: 'User', timestamps: true },
 );

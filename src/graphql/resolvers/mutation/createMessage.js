@@ -30,7 +30,7 @@ const createMessage = async (parent, { data }, { db, pubsub }) => {
       data: message,
     },
   });
-  // console.log(message);
+  console.log(`conversation ${conversation.name}`);
   return message;
 };
 export default createMessage;
